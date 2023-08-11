@@ -87,6 +87,24 @@ class Tank:
         self.angular_speed = 0
         self.theta = 0
         self.body = Polygon2D([(100 + x, y), (x, 50 + y), (x, -50 + y)], color)
+        self.left_track = Polygon2D(
+            [
+                (-40 + x, -30 + y), 
+                (60 + x, -30 + y),
+                (60 + x, -60 + y),
+                (-40 + x, -60 + y), 
+            ],
+            color
+        )
+        self.right_track = Polygon2D(
+            [
+                (-40 + x, 30 + y), 
+                (60 + x, 30 + y),
+                (60 + x, 60 + y),
+                (-40 + x, 60 + y), 
+            ],
+            color
+        )
         self.bullets = []
     
     def shoot(self, bullet_speed):
@@ -100,7 +118,13 @@ class Tank:
         self.x += dx
         self.y += dy
         self.body.translate(dx, dy)
+        self.left_track.translate(dx, dy)
+        self.right_track.translate(dx, dy)
+        
         self.body.rotate(dtheta, pivot=(self.x, self.y))
+        self.left_track.rotate(dtheta, pivot=(self.x, self.y))
+        self.right_track.rotate(dtheta, pivot=(self.x, self.y))
+
         self.update_bullets(delta_time)
 
     def update_bullets(self, delta_time):
@@ -111,7 +135,30 @@ class Tank:
 
     def draw(self):
         self.body.draw()
+        self.left_track.draw()
+        self.right_track.draw()
         arcade.draw_point(self.x, self.y, arcade.color.RED, 4)
 
         for bx, by, theta, speed in self.bullets:
             arcade.draw_point(bx, by, arcade.color.YELLOW, 7)
+
+
+class Enemy:
+    def __init__(self, x, y, r):
+        self.x = x
+        self.y = y
+        self.r = r
+        self.is_alive = True
+    
+    def detect_collision(self, tank: Tank):
+        for bullet in tank.bullets:
+            if self.distance_to(bullet) < self.r:
+                self.is_alive = False
+    
+    def distance_to(self, bullet):
+        xb, yb, tb, sb = bullet
+        return math.sqrt((xb - self.x)**2 + (yb - self.y)**2)
+
+    def draw(self):
+        if self.is_alive:
+            arcade.draw_circle_filled(self.x, self.y, self.r, arcade.color.RED_DEVIL)

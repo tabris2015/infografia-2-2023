@@ -1,6 +1,6 @@
 import arcade
 import random
-from app_objects import Tank
+from app_objects import Tank, Enemy
 
 # definicion de constantes
 SCREEN_WIDTH = 800
@@ -24,6 +24,14 @@ class App(arcade.Window):
         self.rot_speed = 0.5
         self.speed = 10
         self.tank = Tank(400, 400, get_random_color())
+        self.enemies = [
+            Enemy(
+                random.randrange(0, SCREEN_WIDTH),
+                random.randrange(0, SCREEN_HEIGHT),
+                random.randrange(10, 50)
+            )
+            for _ in range(10)
+        ]
     
     def on_mouse_release(self, x: int, y: int, button: int, modifiers: int):
         self.tank.shoot(20)
@@ -48,10 +56,14 @@ class App(arcade.Window):
 
     def on_update(self, delta_time: float):
         self.tank.update(delta_time)
+        for e in self.enemies:
+            e.detect_collision(self.tank)
         
     def on_draw(self):
         arcade.start_render()
         self.tank.draw()
+        for e in self.enemies:
+            e.draw()
     
     
 if __name__ == "__main__":
