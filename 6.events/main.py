@@ -1,5 +1,4 @@
 import arcade
-import numpy as np
 import random
 from app_objects import Polygon2D
 
@@ -32,7 +31,8 @@ class App(arcade.Window):
                     (100 + x, y),
                     (50 + x, 100 + y)
                 ],
-                color=get_random_color()
+                color=get_random_color(),
+                rot_speed=random.uniform(-2.5, 2.5)
             ))
 
     def on_key_release(self, symbol: int, modifiers: int):
@@ -45,7 +45,7 @@ class App(arcade.Window):
 
     def on_update(self, delta_time: float):
         for obj in self.objects:
-            obj.rotate(self.rot_speed * delta_time)
+            obj.rotate(obj.rot_speed * delta_time)
         
     def on_draw(self):
         arcade.start_render()

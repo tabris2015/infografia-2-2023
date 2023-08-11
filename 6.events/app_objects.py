@@ -4,9 +4,10 @@ import math
 
 
 class Polygon2D:
-    def __init__(self, vertices, color):
+    def __init__(self, vertices, color, rot_speed=0):
         self.vertices = vertices
         self.color = color
+        self.rot_speed = rot_speed
 
     def translate(self, dx, dy):
         TM = np.array([
@@ -113,4 +114,4 @@ class Tank:
         arcade.draw_point(self.x, self.y, arcade.color.RED, 4)
 
         for bx, by, theta, speed in self.bullets:
-            arcade.draw_point(bx, by, arcade.color.YELLOW, 3)
+            arcade.draw_point(bx, by, arcade.color.YELLOW, 7)
