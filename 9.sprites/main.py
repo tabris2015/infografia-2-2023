@@ -2,7 +2,7 @@ import math
 import random
 
 import arcade
-from game_object import Player
+from game_object import Player, Bullet
 
 # definicion de constantes
 SCREEN_WIDTH = 800
@@ -18,12 +18,12 @@ class App(arcade.Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
         arcade.set_background_color(arcade.color.DARK_GREEN)
         self.sprites = arcade.SpriteList()
-        self.player = Player("img/tank.gif", SCALING, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        self.player = Player("9.sprites/img/tank.gif", SCALING, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         self.sprites.append(self.player)
         self.bullets = arcade.SpriteList()
         self.enemies = arcade.SpriteList()
         self.score = 0
-        arcade.schedule(self.add_enemy, 2.0)
+        arcade.schedule(self.add_enemy, random.randint(1, 4))
 
     def on_key_press(self, symbol: int, modifiers: int):
         """Metodo para detectar teclas que han sido presionada
@@ -43,17 +43,15 @@ class App(arcade.Window):
             self.player.change_angle = -5
 
         if symbol == arcade.key.SPACE:
-            bullet = arcade.Sprite(
-                "img/bullet.png",
+            bullet = Bullet(
+                "9.sprites/img/bullet.png",
                 0.1,
+                20,
                 angle=self.player.angle + 90,
                 center_x=self.player.center_x,
-                center_y=self.player.center_y,
+                center_y=self.player.center_y
             )
-            bullet.velocity = (
-                BULLET_SPEED * math.cos(math.radians(self.player.angle + 90)),
-                BULLET_SPEED * math.sin(math.radians(self.player.angle + 90))
-            )
+            
             self.bullets.append(bullet)
             self.sprites.append(bullet)
 
@@ -95,6 +93,7 @@ class App(arcade.Window):
                 self.score += 1
 
     def add_enemy(self, delta_time: float):
+        print(delta_time)
         enemy = arcade.SpriteSolidColor(30, 30, arcade.color.RED)
         enemy.left = random.randint(10, SCREEN_WIDTH - 10)
         enemy.top = random.randint(10, SCREEN_HEIGHT - 10)
