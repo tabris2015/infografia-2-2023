@@ -5,7 +5,15 @@ import pymunk
 
 
 class Bird(arcade.Sprite):
-    def __init__(self, image: str, distance: float, angle: float, x: float, y: float, space: pymunk.Space):
+    def __init__(
+            self, 
+            image: str, 
+            distance: float, 
+            angle: float, 
+            x: float, 
+            y: float, 
+            space: pymunk.Space
+        ):
         super().__init__(image, 1)
         mass = 5
         radius = 12
@@ -41,6 +49,7 @@ class PassiveObject(arcade.Sprite):
         shape = pymunk.Poly.create_box(body, (self.width, self.height))
         shape.elasticity = 0.8
         shape.friction = 0.4
+        shape.collision_type = 0
         space.add(body, shape)
         self.body = body
         self.shape = shape
