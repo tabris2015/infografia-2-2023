@@ -35,22 +35,6 @@
 radius = 29.0
 height = 108.0
 
-[sub_resource type="Animation" id="Animation_verfq"]
-resource_name = "idle"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4, 0.8, 1.2, 1.7, 2.4, 3.3, 4.8, 9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("1_5350v"), ExtResource("2_taxvd"), ExtResource("3_k0qyt"), ExtResource("4_1sp6x"), ExtResource("5_qkas2"), ExtResource("6_lxge1"), ExtResource("7_tdsv8"), ExtResource("8_d0fja"), ExtResource("9_rb6gw"), ExtResource("10_ay60p")]
-}
-
 [sub_resource type="Animation" id="Animation_56e2s"]
 length = 0.001
 tracks/0/type = "value"
@@ -79,6 +63,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("1_5350v"), ExtResource("11_wpqit"), ExtResource("12_ifbve"), ExtResource("13_ise0q"), ExtResource("14_qbxee"), ExtResource("15_eqiw6"), ExtResource("16_jptfb"), ExtResource("17_0xi8a"), ExtResource("18_uixxt"), ExtResource("19_kkccb")]
+}
+
+[sub_resource type="Animation" id="Animation_verfq"]
+resource_name = "idle"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.8, 1.2, 1.7, 2.4, 3.3, 4.8, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_5350v"), ExtResource("2_taxvd"), ExtResource("3_k0qyt"), ExtResource("4_1sp6x"), ExtResource("5_qkas2"), ExtResource("6_lxge1"), ExtResource("7_tdsv8"), ExtResource("8_d0fja"), ExtResource("9_rb6gw"), ExtResource("10_ay60p")]
 }
 
 [sub_resource type="Animation" id="Animation_72iir"]
