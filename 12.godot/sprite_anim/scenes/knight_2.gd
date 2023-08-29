@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 const MAX_SPEED = 80
 const FRICTION = 500
+
+var hp = 5 # puntos de vitalidad
 var is_attacking = false
 var state_machine
 func _ready():
@@ -22,7 +24,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack"):
 		state_machine.travel("attack")
 		
-	print(input_vector)
+	#print(input_vector)
 	velocity = MAX_SPEED * input_vector
 	# si mira a la izquierda o derecha
 	if velocity.x < 0:
@@ -31,3 +33,8 @@ func _physics_process(delta):
 		$Sprite2D.scale.x = abs($Sprite2D.scale.x)
 	
 	move_and_slide()
+
+func _on_hurtbox_area_entered(area):
+	print("damage!")
+	hp -= 1
+	
