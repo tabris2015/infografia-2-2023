@@ -10,9 +10,10 @@ size = Vector2(120, 120)
 [node name="App" type="Node2D"]
 
 [node name="Knight2" parent="." instance=ExtResource("1_1ls6w")]
+position = Vector2(34, 62)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(48, 0)
+position = Vector2(91, 64)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_cuum7")
 

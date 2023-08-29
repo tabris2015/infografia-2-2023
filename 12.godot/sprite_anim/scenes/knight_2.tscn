@@ -63,6 +63,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [Vector2i(0, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_p5k8y"]
 resource_name = "attack"
@@ -222,6 +234,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [Vector2i(0, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.960784, 0.247059, 0.164706, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ini25"]
 resource_name = "idle"
@@ -364,7 +388,7 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0iad6"]
-states/End/position = Vector2(900.5, 99.625)
+states/End/position = Vector2(856, 170.125)
 states/Start/position = Vector2(199.5, 99.6719)
 states/attack/node = SubResource("AnimationNodeAnimation_v6gue")
 states/attack/position = Vector2(372.5, 57.5)
@@ -379,6 +403,7 @@ states/idle/position = Vector2(504, 257.312)
 states/run/node = SubResource("AnimationNodeAnimation_pc5u4")
 states/run/position = Vector2(269, 343.5)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_r06as"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_xhcn6"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_b6fvr"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_6ywjx"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_1e8rm"), "idle", "attack2", SubResource("AnimationNodeStateMachineTransition_qfeaa"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_315by"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_anny7"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_1gavw"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_vtrp2"), "death", "End", SubResource("AnimationNodeStateMachineTransition_5ypvs")]
+graph_offset = Vector2(-254.565, 77.3325)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k31g6"]
 radius = 8.0
@@ -412,6 +437,10 @@ collision_mask = 16
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_k31g6")
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="." method="_on_hurtbox_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
 [editable path="Hurtbox"]
