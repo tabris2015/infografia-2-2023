@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bu5h5hgruyyov"]
+[gd_scene load_steps=38 format=3 uid="uid://bu5h5hgruyyov"]
 
 [ext_resource type="Script" path="res://scenes/knight_2.gd" id="1_gjh3y"]
 [ext_resource type="Texture2D" uid="uid://cu5x0yb4sa64v" path="res://img/knight2/_Idle.png" id="1_mnuv8"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cm8atlr8x5sro" path="res://img/knight2/_Death.png" id="5_atls7"]
 [ext_resource type="Texture2D" uid="uid://dgckko1oskbu1" path="res://img/knight2/_Hit.png" id="6_4jxav"]
 [ext_resource type="PackedScene" uid="uid://bjkrosr7enp81" path="res://scenes/hurtbox.tscn" id="8_fs3pf"]
+[ext_resource type="PackedScene" uid="uid://l5b0ddx84nmj" path="res://scenes/hitbox.tscn" id="9_ge48t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ux51m"]
 radius = 7.0
@@ -75,6 +76,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Marker2D/Hitbox/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_p5k8y"]
 resource_name = "attack"
@@ -115,6 +128,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Marker2D/Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_hx5bs"]
 resource_name = "attack2"
@@ -154,6 +179,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Marker2D/Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_nh6ud"]
@@ -383,10 +420,6 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vtrp2"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ypvs"]
-switch_mode = 2
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0iad6"]
 states/End/position = Vector2(856, 170.125)
 states/Start/position = Vector2(199.5, 99.6719)
@@ -402,11 +435,14 @@ states/idle/node = SubResource("AnimationNodeAnimation_84ykq")
 states/idle/position = Vector2(504, 257.312)
 states/run/node = SubResource("AnimationNodeAnimation_pc5u4")
 states/run/position = Vector2(269, 343.5)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_r06as"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_xhcn6"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_b6fvr"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_6ywjx"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_1e8rm"), "idle", "attack2", SubResource("AnimationNodeStateMachineTransition_qfeaa"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_315by"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_anny7"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_1gavw"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_vtrp2"), "death", "End", SubResource("AnimationNodeStateMachineTransition_5ypvs")]
-graph_offset = Vector2(-254.565, 77.3325)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_r06as"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_xhcn6"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_b6fvr"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_6ywjx"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_1e8rm"), "idle", "attack2", SubResource("AnimationNodeStateMachineTransition_qfeaa"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_315by"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_anny7"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_1gavw"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_vtrp2")]
+graph_offset = Vector2(35.2951, 17.505)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k31g6"]
 radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1j2xa"]
+radius = 21.095
 
 [node name="Knight2" type="CharacterBody2D"]
 script = ExtResource("1_gjh3y")
@@ -439,8 +475,21 @@ shape = SubResource("CircleShape2D_k31g6")
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Hitbox" parent="Marker2D" instance=ExtResource("9_ge48t")]
+position = Vector2(27, 0)
+
+[node name="CollisionShape2D" parent="Marker2D/Hitbox" index="0"]
+shape = SubResource("CircleShape2D_1j2xa")
+debug_color = Color(0.752941, 0.454902, 0, 0.419608)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5.9, 5.9)
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_hurtbox_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
 [editable path="Hurtbox"]
+[editable path="Marker2D/Hitbox"]
