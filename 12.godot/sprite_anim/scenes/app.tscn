@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://c23ciqo2q3kan"]
+[gd_scene load_steps=7 format=3 uid="uid://c23ciqo2q3kan"]
 
 [ext_resource type="PackedScene" uid="uid://bu5h5hgruyyov" path="res://scenes/knight_2.tscn" id="1_1ls6w"]
+[ext_resource type="PackedScene" uid="uid://dak5822ukydyp" path="res://scenes/world.tscn" id="1_fuye4"]
 [ext_resource type="Texture2D" uid="uid://dvu54xxrgpctc" path="res://icon.svg" id="2_cuum7"]
 [ext_resource type="PackedScene" uid="uid://l5b0ddx84nmj" path="res://scenes/hitbox.tscn" id="3_5sf4a"]
+[ext_resource type="PackedScene" uid="uid://bye7t8gi8rpmu" path="res://enemy.tscn" id="5_dvd3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wr71o"]
 size = Vector2(120, 120)
 
 [node name="App" type="Node2D"]
+
+[node name="World" parent="." instance=ExtResource("1_fuye4")]
 
 [node name="Knight2" parent="." instance=ExtResource("1_1ls6w")]
 position = Vector2(34, 62)
@@ -25,5 +29,7 @@ collision_mask = 0
 position = Vector2(0, -7.15256e-06)
 shape = SubResource("RectangleShape2D_wr71o")
 debug_color = Color(0.917647, 0.207843, 0.482353, 0.419608)
+
+[node name="Enemy" parent="." instance=ExtResource("5_dvd3i")]
 
 [editable path="Sprite2D/Hitbox"]

@@ -50,9 +50,10 @@ func _physics_process(delta):
 	# si mira a la izquierda o derecha
 	if velocity.x < 0:
 		$Sprite2D.scale.x = abs($Sprite2D.scale.x) * -1
+		$Marker2D.scale.x = abs($Marker2D.scale.x) * -1
 	elif velocity.x > 0:
 		$Sprite2D.scale.x = abs($Sprite2D.scale.x)
-	
+		$Marker2D.scale.x = abs($Marker2D.scale.x)
 	move_and_slide()
 
 func _on_hurtbox_area_entered(area):
