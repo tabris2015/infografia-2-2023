@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlfr0q7witd77"]
+
+[ext_resource type="PackedScene" uid="uid://dgbwxupch2ee5" path="res://scenes/agent.tscn" id="1_ilrh5"]
+[ext_resource type="Script" path="res://scenes/Goal.gd" id="2_dosqm"]
+[ext_resource type="Texture2D" uid="uid://dvu54xxrgpctc" path="res://icon.svg" id="3_ondtb"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_8svdg"]
+vertices = PackedVector2Array(794, 1, 793, 598, 720, 593, 717, 489, 627, 403, 645, 2, 632, 480, 189, 208, 191, 339, 79, 335, 119, 258, 449, 0, 589, 1, 573, 316, 455, 256, 357, 304, 368, 252, 616, 600, 404, 598, 407, 531, 516, 529, 524, 464, 355, 374, 361, 451, 290, 4, 369, 3, 367, 131, 293, 128, 194, 596, 3, 599, 3, 254, 79, 387, 119, 179, 3, 179, 3, 2, 220, 2, 223, 127, 348, 593, 248, 592, 243, 307, 290, 306, 289, 208, 189, 389)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 0, 3, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(14, 13, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(6, 17, 20, 21, 4), PackedInt32Array(22, 4, 21, 23), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(28, 29, 30, 31), PackedInt32Array(32, 33, 34, 35, 36), PackedInt32Array(23, 37, 38, 39, 40, 22), PackedInt32Array(15, 22, 40, 41), PackedInt32Array(26, 16, 15, 41, 27), PackedInt32Array(36, 27, 41, 7, 32), PackedInt32Array(10, 32, 7), PackedInt32Array(30, 10, 9), PackedInt32Array(31, 42, 28), PackedInt32Array(30, 9, 31)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(3, 2, 220, 2, 223, 127, 293, 128, 290, 4, 369, 3, 367, 131, 368, 252, 455, 256, 449, 0, 589, 1, 573, 316, 357, 304, 355, 374, 627, 403, 645, 2, 794, 1, 793, 598, 720, 593, 717, 489, 632, 480, 616, 600, 404, 598, 407, 531, 516, 529, 524, 464, 361, 451, 348, 593, 248, 592, 243, 307, 290, 306, 289, 208, 189, 208, 191, 339, 79, 335, 79, 387, 189, 389, 194, 596, 3, 599, 3, 254, 119, 258, 119, 179, 3, 179)])
+
+[node name="ObstacleAvoidance" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_8svdg")
+
+[node name="Agent" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_ilrh5")]
+position = Vector2(59, 85)
+movement_speed = 60.0
+target = NodePath("../Goal")
+
+[node name="Agent4" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_ilrh5")]
+position = Vector2(59, 85)
+movement_speed = 60.0
+target = NodePath("../Goal")
+
+[node name="Goal" type="Marker2D" parent="."]
+position = Vector2(331, 294)
+script = ExtResource("2_dosqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Goal"]
+modulate = Color(0, 1, 0, 1)
+scale = Vector2(0.164062, 0.164062)
+texture = ExtResource("3_ondtb")
+
+[node name="Agent2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_ilrh5")]
+position = Vector2(52, 452)
+target = NodePath("../Goal")
+
+[node name="Agent3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_ilrh5")]
+position = Vector2(520, 90)
+target = NodePath("../Goal")

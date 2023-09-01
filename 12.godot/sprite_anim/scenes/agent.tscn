@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgbwxupch2ee5"]
+
+[ext_resource type="Script" path="res://scenes/agent.gd" id="1_c48ej"]
+[ext_resource type="Texture2D" uid="uid://dvu54xxrgpctc" path="res://icon.svg" id="1_ia5ob"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lvsfe"]
+radius = 19.0263
+
+[node name="Agent" type="CharacterBody2D"]
+script = ExtResource("1_c48ej")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.296875, 0.296875)
+texture = ExtResource("1_ia5ob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lvsfe")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
